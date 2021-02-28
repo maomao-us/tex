@@ -1,0 +1,203 @@
+\documentclass[technicalreport]{ieicej}
+%\documentclass[technicalreport,usejistfm]{ieicej}
+\usepackage[dvips]{graphicx}
+\usepackage{latexsym}
+\usepackage[fleqn]{amsmath}
+\usepackage[psamsfonts]{amssymb}
+
+\def\IEICEJcls{\texttt{ieicej.cls}}
+\def\IEICEver{1.3}
+\newcommand{\AmSLaTeX}{%
+ $\mathcal A$\lower.4ex\hbox{$\!\mathcal M\!$}$\mathcal S$-\LaTeX}
+\newcommand{\PS}{{\scshape Post\-Script}}
+\def\BibTeX{{\rmfamily B\kern-.05em{\scshape i\kern-.025em b}\kern-.08em
+ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125em X}}
+
+%%%%%%%%%%%%%%
+\small
+\jtitle{受動歩行における歩行パターンの動力学}
+%%\jsubtitle{技術研究報告原稿のための解説とテンプレート}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  これは国際会議ね
+%%\etitle{Passive Dynamical Walking and Coexistance of
+%%        Different Walking Pattern Attractors}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% これは英語の本当の論文用かな
+%%\etitle{Different Attractors Coexistance of
+%%        Walking Pattern in Passive Dynamical Walking}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\etitle{Dynamical analysis of Passive Dynamic Walking}
+%%\esubtitle{Guide to the Technical Report and Template}
+\authorlist{%
+  \authorentry[toyoda@i.his.fukui-u.ac.jp]{豊田 範哲}{Noriaki TOYODA}{Fukui1}
+  \authorentry[jou@i.his.fukui-u.ac.jp]{黒岩 丈介}{Jousuke KUROIWA}{Fukui1}
+  \authorentry{小倉 久和}{Hisakazu Ogura}{Fukui1}
+  \authorentry{小高 知宏}{Tomohiro Odaka}{Fukui2}
+  \authorentry{高橋 勇}{Isamu Takahashi}{Fukui1}
+  \authorentry{白井 治彦}{Haruhiko Shirai}{Fukui3}
+}
+\affiliate[Fukui1]{福井大学大学院工学研究科知能システム工学専攻\hskip1zw
+  〒910--0017 福井県福井市文京3--9--1}
+{Department of Human \& Artificial Intelligent Systems, Graduate
+  Course of Engineering, Graduate School, University of Fukui,
+  Bunkyou 3--9--1, Fukui-city, Fukui,
+  910--0017 Japan}
+\affiliate[Fukui2]{福井大学大学院原子力・エネルギー安全工学専攻\hskip1zw
+  〒910--0017 福井県福井市文京3--9--1}
+  {Graduate Program 0f Nuclear Power and Energy Safety
+  Engineering,University of Fukui}
+\affiliate[Fukui3]{福井大学工学部技術部\hskip1zw
+  〒910--0017 福井県福井市文京3--9--1}
+  {Department of Engineering,Department of Technology,University of Fukui}
+
+\MailAddress{$\dagger$\{taro,jiro\}@i.his.fukui-u.ac.jp}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  概要(日本語)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{jabstract}
+本研究では，2リンク受動歩行にあらわれる歩行パターンを，数値的に明らかにすることを目的としてい
+る．このシステムでは，床の傾斜角度及び腰と足の質量比が重要なシステムパラメータとなる．従来の研究では，足
+の質量が腰の質量に対して十分に小さいと仮定していた．この仮定によって，初期値のパラメータ空間を4次元から
+2次元に縮約していた．この仮定のもと，特定の初期値から歩行を開始すると，歩行パターンは床の傾斜角度と脚の
+長さをシステムパラメータとして，唯一の歩行パターンに収束していた．本研究では，仮定を用いずに全ての歩行パ
+ターンを数値的に解析した．その結果，同時に2つの異なる歩行パターンのアトラクタが共存することが分かった．
+\end{jabstract}
+\begin{jkeyword}
+受動歩行，歩行パターン，アトラクタ共存
+\end{jkeyword}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  概要(英語)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{eabstract}
+The purpose of the paper is to investigate all possible walking patterns in 2-link passive dynamical
+walking. In this system, the slope angle and the ratio of the hip's mass and the leg's mass are important system
+parameters. In the conventional study, it is assumed that the mass of the hip is much larger than the center of
+mass of the leg. This assumption gives a big merit that the initial conditionspace shrinks to two dimension from
+four. Based on the assumption, starting from a certain initial condition, the walking pattern certainly converges to
+unique attractor depending on the system parameters, the slope angle and the leg length. In the paper, we analyze
+all the possible walking patterns numerically without the assumption. The results show that there coexist different
+two attractors of walking pattern simultaneously.
+\end{eabstract}
+\begin{ekeyword}
+passive dynamic walking,
+walking pattern, attractor coexistance
+\end{ekeyword}
+\maketitle
+\newblock
+\newpage
+\newblock
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  まえがき
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{まえがき}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  第1章
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{2 リンク受動歩行の定式化}
+本研究で用いる2リンク受動歩行ロボットのモデルは，
+図 \ref{fig:model} に示すような2次元のモデルを考える\cite{4}．
+これは人の下半身をモデル化したものである．
+脚は質量のない剛体と脚先からaの距離にある質点で表わす．
+ここでは，接地している方の脚を支持脚，もう一方の脚を遊脚と呼ぶことにする．
+腰は2つの脚を連結する大きさの無視できるリンクとし，
+その質量は上半身を代表するものと考える．
+床面は脚と非弾性衝突を起こし，摩擦は無限大であるとする．
+そのため，支持脚と床の接点はリンクと考えることができる．
+また，各剛体の回転による慣性モーメントと関節の粘性摩擦は無視する．
+%
+% 図 %%%%%%%%%%%%%%%%
+\begin{figure}[tb]
+  \begin{center}
+    \includegraphics[width=5cm]{./images/model.eps}
+%    \vspace{45mm}
+    \caption{2リンク受動歩行ロボットのモデル}
+    \label{fig:model}
+    \ecaption{A model of two link Passive Dynamic Walking robot}
+  \end{center}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%
+%
+図\ref{fig:model}中，また以降の方程式で扱う記号は表\ref{table:kigou}に示す通りである．
+
+% 表 %%%%%%%%%%%%%%%%%
+\begin{table}[tb]
+\caption{記号の説明}
+\label{table:kigou}
+\ecaption{Explanation of a sign}
+\begin{center}
+  \begin{tabular}{c|c}
+    \Hline
+    記号 & 記号説明 \\ \hline
+    $\theta_1$ & 床面と垂直な方向を基準とした支持脚の角度\\
+    $\theta_2$ & 床面と垂直な方向を基準とした遊脚の角度\\
+    $\phi$ & 水平方向からの床の傾斜角度\\
+    $m_{\mathrm{H}}$ & 腰の質量\\
+    $m$ & 足の質量\\
+    $\beta$ & \FRAC{$m$}{$m_h$}\\
+    $a$ & 腰から足の質点までの距離\\
+    $b$ & 足先から足の質点までの距離\\
+    $l$ & 足の長さ\\
+    $\mu$ & \FRAC{$a$}{$l$}\\
+    $\nu$ & \FRAC{$b$}{$l$}\\
+    $\mathrm{A},\mathrm{B}$ & 支持脚,遊脚の質点の位置\\
+    $\mathrm{C},\mathrm{D}$ & 支持脚,遊脚の足先の位置\\
+    $\mathrm{H}$ & 腰の位置\\
+    $S$ & $\sin(\theta_1 - \theta_2)$\\
+    $C$ & $\cos(\theta_1 - \theta_2)$\\
+    \Hline
+  \end{tabular}
+\end{center}
+\end{table}
+%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{thebibliography}{99}
+\bibitem{3}
+  李清華，高西淳夫，加藤一郎．
+  ZMPを安定規範とした2足歩行ロボットの上体補償運動の学習制御．
+  日本ロボット学会誌，Vol.11，No.4，pp.557-563，1993．
+
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  付録
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  運動方程式
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{運動方程式}
+
+\subsection{振子運動時の方程式}
+\label{sec:undou}
+
+全体の運動エネルギーを$T$とすると
+\begin{eqnarray}
+    T &=& \frac{1}{2}  m(\dot{x}_A^2 + \dot{y}_A^2)
+       + \frac{1}{2}m_H(\dot{x}_H^2 + \dot{y}_H^2)
+       + \frac{1}{2}  m(\dot{x}_B^2 + \dot{y}_B^2)\nonumber\\
+      &=& \frac{1}{2}(ma^2 + m_Hl^2 + ml^2)\dot{\theta}_1^2\nonumber\\
+      & & \mbox{} + \frac{1}{2}mb^2\dot{\theta}_2^2
+       - \frac{1}{2}mlb\dot{\theta}_1\dot{\theta}_2C
+\end{eqnarray}
+である。
+
+\end{document}
