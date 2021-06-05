@@ -1,0 +1,156 @@
+\input{texheder.tex}
+\usepackage{setspace} % setspaceパッケージのインクルード
+\usepackage{enumitem}
+\usepackage{grffile}
+\usepackage{url}
+\usepackage{diagbox}
+
+%「Weekly Report」
+\newcommand{\Weekly}[5]{
+\twocolumn[
+    \begin{center}
+    \bf
+    第 #1 回　Weekly Report\\
+    \huge
+    スマートフォンのスイング動作に潜在する個人特性\\
+    \LARGE
+    --- フルフルによる個人認証 ---\\
+
+    \end{center}
+    \begin{flushright}
+        #2 月\ \ \  #3 日 \ \ \ #4 \
+        #5
+    \end{flushright}
+    ]
+}
+%\setstretch{0.5} % ページ全体の行間を設定
+
+\begin{document}
+
+    \Weekly{3}{4}{27}{(火)}{\ 中島　基晴}
+
+    % 1章
+    \section{今週までの作業内容}
+
+        \begin{itemize}
+            \item 移動平均法の再評価と決定．
+
+            % \item 誰の計測を検定して評価するのかを決定，及びお願い
+        \end{itemize}
+
+    先週の進捗で荷重移動平均法を使用すると述べたが，進捗後に
+    黒岩先生とお話し合いの末，移動平均法の評価方法を追加した．
+
+    % 2つ目の項目は誰の計測データを検定するかを決定と協力のお願いである．
+
+    %2章
+    \section{移動平均法の再評価と決定}
+
+        先週の進捗までに用いた移動平均法の評価方法を
+        以下に示す．
+
+        \begin{itemize}
+            \item オリジナルデータとの一致率評価
+        \end{itemize}
+        ここで一致率評価とは移動平均前後のデータを比較し，
+        その誤差を$0〜1$ の範囲で評価することである．
+        例えば移動平均前のデータと同じく移動平均前のデータを
+        比較したら，これは完全一致なので誤差は0である．
+        本研究では誤差が小さい移動平均処理したデータを
+        使用したいので$0$ に一番近い移動平均法を選出し，
+        それが荷重移動平均法であった．
+
+        今週までに行った再評価では以下の項目を行った．
+
+        \begin{itemize}
+            \item ノイズの除去精度
+            \item 検定統計量 T の値の評価
+        \end{itemize}
+
+        %2.1章
+        \subsection{ノイズの除去精度の評価}
+
+            ノイズの除去精度の評価とは，移動平均処理後に
+            どれだけノイズが取り除かれているかを比較し，
+            最もノイズが取り除かれている移動平均法を高く評価することである．
+            しかし結果はどの移動平均法も精度に差がなかった．
+            以下の図\ref{fig:hikaku}をみていただきたい．
+
+            \begin{figure}[h]
+                % \centering
+                \vspace{40mm}
+                \hspace{-0.8cm}
+                \includegraphics[scale=0.2]{images_S3/hikaku.eps}
+                \vspace{-5mm}
+                % \hspace{-3.5cm}
+                \caption{移動平均後処理前後の比較}
+                \label{fig:hikaku}
+            \end{figure}
+            図\ref{fig:hikaku}は移動平均処理前のデータと
+            各移動平均を平均区間$n = 5$，移動平均処理回数$t = 5$で
+            処理したデータを比較している．
+            図\ref{fig:hikaku}からどの移動平均も
+            ノイズ除去精度に差がないことがわかる．
+
+        %2.2章
+        \subsection{検定統計量 T の値の評価}
+
+        検定統計量 T の値の評価とは，各データから極値を抽出後に
+        母平均の差の検定で検定統計量$T$ を計算し，その値が最も大きい
+        ものを高く評価することである．
+        その結果を以下の表\ref{table:toukei}に示す．
+
+    \begin{table}[h]
+        \caption{各移動平均の評価結果}
+        \vspace{2mm}
+        \label{table:toukei}
+        \centering
+        \begin{tabular}{|c|c|c|c|c|}
+            \hline
+            \diagbox{移動平均}{成分} & x & y & z & abs\\ \hline \hline
+            sma & $4.34$                  & $1.34$                  & $1.94$                  & $1.33$\\
+            wma & \textcolor{red}{$4.36$} & $1.24$                  & \textcolor{red}{$1.99$} & \textcolor{red}{$1.39$}\\
+            ewa & $4.18$                  & \textcolor{red}{$1.41$} & $1.10$                  & $0.94$\\
+            \hline
+        \end{tabular}
+    \end{table}
+
+    ｘ，ｙ，ｚ，abs はそれぞれ ｘ座標軸方向，ｙ座標軸方向，ｚ座標軸方向，絶対加速度で,，
+    sma，wma，ewa はそれぞれ単純移動平均法，荷重移動平均法，指数平均移動法を表す．
+    そして赤色の値は各移動平均処理の中で最も大きい値である．
+    表\ref{table:toukei}を見ると，ｙ座標軸方向だけ指数平均移動処理の値が大きいが，
+    それ以外は荷重移動平均処理の値が大きい．
+
+    以上の結果から引き続き荷重移動平均法を使用する．
+
+    % \section{評価方法の詳細とお願い}
+
+    %     本研究では，私と同時期に黒岩研に配属になったB4生5人
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % 3章
+    \section{今後の予定}
+
+    \begin{itemize}
+        \item 誰のデータを検定するかを決定
+    \end{itemize}
+
+    % \section{参考文献}
+    %     [1]【NumPy入門】加重平均（重み付き平均）も計算できるnp.average！ \\
+    %     \url{https://www.sejuku.net/blog/73794} \\
+
+    %     [2]scikit-learn で回帰モデルの結果を評価する \\
+    %     \url{https://pythondatascience.plavox.info/scikit-learn/%E5%9B%9E%E5%B8%B0%E3%83%A2%E3%83%87%E3%83%AB%E3%81%AE%E8%A9%95%E4%BE%A1}\\
+
+    %     [3]pandas.DataFrame.ewm — pandas 1.2.4 documentation \\
+    %     \url{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.ewm.html} \\
+
+    %     [4]Python: 中心化移動平均 (CMA: Centered Moving Average) について \\
+    %     \url{https://blog.amedama.jp/entry/centered-moving-average}\\
+
+    %     [5]Pandas 演習としてのテクニカル指標計算 〜 移動平均の巻 \\
+    %     \url{https://mariyudu.hatenablog.com/entry/2019/03/30/174547} \\
+
+    %     [6]石村園子．すぐわかる確率・統計．pp.204〜pp.225.\\
+\end{document}

@@ -1,0 +1,121 @@
+\input{texheder.tex}
+\usepackage{setspace} % setspaceパッケージのインクルード
+\usepackage{enumitem}
+\usepackage{grffile}
+\usepackage{url}
+\usepackage{diagbox}
+
+%「Weekly Report」
+\newcommand{\Weekly}[5]{
+\twocolumn[
+    \begin{center}
+    \bf
+    第 #1 回　Weekly Report\\
+    \huge
+    スマートフォンのスイング動作に潜在する個人特性\\
+    \LARGE
+    --- フルフルによる個人認証 ---\\
+
+    \end{center}
+    \begin{flushright}
+        #2 月\ \ \  #3 日 \ \ \ #4 \
+        #5
+    \end{flushright}
+    ]
+}
+%\setstretch{0.5} % ページ全体の行間を設定
+
+\begin{document}
+
+    \Weekly{4}{5}{4}{(火)}{\ 中島　基晴}
+
+    % 1章
+    \section{今週までの作業内容}
+
+        \begin{itemize}
+            \item 計測データの収集
+            \item 極値の抽出
+        \end{itemize}
+
+        % 1.1章
+        \subsection{協力者の紹介}
+            本研究の計測データの協力者を以下に示す．
+
+            \begin{itemize}
+                \item B4生男子　5人
+                \item M1生男子　1人
+                \item M1生女子　2人
+                \item 教員　　　1人
+            \end{itemize}
+            上記の協力者から計測データを頂いたのには理由がある．
+
+            まずB4生男子について，これは同じ年齢，同じ選別の場合で
+            どの座標軸方向に有意差が多く現れるのかを調べるためである．
+
+            次にM1生女子について，年齢が近いという条件で
+            男子と女子で有意差を調べた場合，男子だけで有意差を調べた結果と
+            比較するためである．教員も同様の理由で，この場合は
+            年齢に差が合った時に違いができるのかを確認する．
+
+            ここでM1生男子とB4生男子の違いについて述べる．
+            この2つの違いは体を鍛えているかどうかである．
+            私が所属している黒岩研では月曜日から金曜日まで何かしらの運動をしている．
+            そのため自然と鍛えられた者が現れる．ただしこの
+            M1生男子は黒岩研に所属する前から鍛えていたため
+            この限りではない．
+            この違いから体を鍛えた場合とそうでない場合で有意差の現れ方に
+            違いが生じるのかを検証することができる．
+            またM1生女子に1人，黒岩研で1年間鍛えた者がいるので
+            数はこちらも同様の検証を行うことができる．
+            欲を言えば10代男子・女子，20代男子・女子，$\cdots$，と言うように
+            各年代，各性別の計測データを収集したかった．
+            しかし福井大学工学部に女子が圧倒的に少ないことと
+            コロナの影響で他人と近づきがたい状況になったため
+            どれだけ頑張っても20代男子の十分な検証結果を得ることが限界だと
+            思われる．
+
+        %1.2章
+        \subsection{スイング動作の回数}
+
+            協力者にスマホのスイング動作を数回行ってもらうが，
+            この回数を2回，3回，4回，5回の4段階に分ける．
+            これにより何回スイング動作を行うと
+            有意差が現れやすくなるのかを調べることができる．
+
+            この計測をそれぞれ20回行ってもらう予定であるが，
+            黒岩先生から後半になるにつれて集中力が切れてしまい，
+            前半と後半の計測データに差が生じてしまうのではないか
+            という意見を頂いた．
+            よって，現時点で得た計測データから20回の各20回の計測で
+            同じ人のデータでも差が生じるのかどうかを調べる．
+            具体的には母平均の差の検定を行い，有意差があるかないかで判断する．
+            有意差がなければ20回の計測による前半と後半のデータの差はないと
+            判断することができる．
+
+
+    % 2章
+    \section{今後の予定}
+
+    \begin{itemize}
+        \item データ収集及び極値の抽出
+        \item 20回の計測によって差が生じるかどうかを調査
+    \end{itemize}
+
+    % \section{参考文献}
+    %     [1]【NumPy入門】加重平均（重み付き平均）も計算できるnp.average！ \\
+    %     \url{https://www.sejuku.net/blog/73794} \\
+
+    %     [2]scikit-learn で回帰モデルの結果を評価する \\
+    %     \url{https://pythondatascience.plavox.info/scikit-learn/%E5%9B%9E%E5%B8%B0%E3%83%A2%E3%83%87%E3%83%AB%E3%81%AE%E8%A9%95%E4%BE%A1}\\
+
+    %     [3]pandas.DataFrame.ewm — pandas 1.2.4 documentation \\
+    %     \url{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.ewm.html} \\
+
+    %     [4]Python: 中心化移動平均 (CMA: Centered Moving Average) について \\
+    %     \url{https://blog.amedama.jp/entry/centered-moving-average}\\
+
+    %     [5]Pandas 演習としてのテクニカル指標計算 〜 移動平均の巻 \\
+    %     \url{https://mariyudu.hatenablog.com/entry/2019/03/30/174547} \\
+
+    %     [6]石村園子．すぐわかる確率・統計．pp.204〜pp.225.\\
+\end{document}
